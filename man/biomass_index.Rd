@@ -19,5 +19,5 @@ Calculates biomass index from CPUE and area swept.
 }
 \examples{
 salmon_cpue <- cpue(catch=2, effort=2)
-
+biomass_index<- biomass_index(salmon_cpue, area_swept=1)
 }
