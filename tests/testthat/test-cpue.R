@@ -24,3 +24,10 @@ test_that("gear_factor  standardization scales correctly",{
     cpue(100,10, gear_factor=1))
 })
 
+test_that("cpue handles missing data", {
+  expect_true(is.na(cpue(NA_real_, 10)))
+  expect_true(is.na(cpue(10,NA_real_)))
+
+})
+
+
