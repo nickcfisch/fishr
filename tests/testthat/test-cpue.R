@@ -31,3 +31,39 @@ test_that("cpue handles missing data", {
 })
 
 
+test_that("cpue works with generated data",{
+  data<- generate_fishing_data(n=5)
+
+  result <- cpue(data$catch, data$effort)
+
+  expect_equal(
+    result,
+    c(34.052837 ,  9.064945 , 19.238772, 135.640053   ,6.371919)
+  )
+})
+
+test_that("cpue matches reference data",{
+   result <- cpue(reference_data$catch, reference_data$effort)
+
+   expect_equal(result, reference_data$expected_cpue
+  )
+})
+
+test_that("cpue provides informative message when verbose", {
+  expect_message(
+    cpue(c(100,200), c(10,20), verbose=TRUE), "Processing 2 records")
+
+  expect_no_message(cpue(100,10))
+})
+
+
+## Snapshot tests
+
+test_that("cpue errors when input is not numeric", {
+  expect_snapshot(
+    cpue("five", 10),
+    error=TRUE
+  )
+})
+
+
